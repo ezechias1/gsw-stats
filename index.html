@@ -9,50 +9,108 @@
 <body>
 
   <nav class="nav">
-    <a href="index.html" class="nav-logo">WARRIORS</a>
+    <a href="index.html" class="nav-logo">
+      <img src="img/warriors-logo.svg" alt="Warriors Logo" />
+      WARRIORS
+    </a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="roster.html">Roster</a>
       <a href="legends.html">Legends</a>
       <a href="compare.html">Compare</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </nav>
 
   <section class="hero">
+    <div class="hero-glow"></div>
+    <img src="img/warriors-logo.svg" alt="Warriors Logo" class="hero-logo" />
     <p class="hero-subtitle">Golden State</p>
     <h1 class="hero-title">Warriors</h1>
     <hr class="hero-divider" />
-    <p class="hero-subtitle">EST. 1946 · 7x NBA CHAMPIONS</p>
+    <p class="hero-subtitle">EST. 1946 &middot; 7x NBA CHAMPIONS</p>
   </section>
 
-  <section style="max-width:900px;margin:0 auto;padding:60px 40px;">
+  <section class="main-content-animate" style="max-width:900px;margin:0 auto;padding:60px 40px;">
     <h3 style="font-size:11px;letter-spacing:4px;color:var(--text-muted);text-transform:uppercase;margin-bottom:32px;">Featured Player</h3>
     <h2 id="featured-name" style="font-size:36px;font-weight:300;letter-spacing:2px;margin:0 0 8px;"></h2>
     <p id="featured-meta" style="font-size:12px;color:var(--text-muted);letter-spacing:1px;margin:0 0 32px;"></p>
     <div id="featured-stats" class="stat-grid"></div>
   </section>
 
-  <section style="max-width:900px;margin:0 auto;padding:0 40px 80px;">
+  <section class="main-content-animate" style="max-width:900px;margin:0 auto;padding:0 40px 80px;">
     <h3 style="font-size:11px;letter-spacing:4px;color:var(--text-muted);text-transform:uppercase;margin-bottom:32px;">Franchise History</h3>
-    <div class="stat-grid">
+    <div class="stat-grid" id="franchise-stats">
       <div class="stat-card">
-        <div class="stat-value">7</div>
+        <div class="stat-value" data-count="7">7</div>
         <div class="stat-label">Championships</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">1946</div>
+        <div class="stat-value" data-count="1946">1946</div>
         <div class="stat-label">Founded</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">12</div>
+        <div class="stat-value" data-count="12">12</div>
         <div class="stat-label">Retired Numbers</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">53</div>
+        <div class="stat-value" data-count="53">53</div>
         <div class="stat-label">Hall of Famers</div>
       </div>
     </div>
   </section>
+
+  <section class="timeline-section main-content-animate">
+    <h3>Championship History</h3>
+    <div class="timeline-scroll">
+      <div class="timeline-track" id="championship-timeline">
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="1947">1947</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Philadelphia Warriors</div>
+          <div class="timeline-players">Joe Fulks</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="1956">1956</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Philadelphia Warriors</div>
+          <div class="timeline-players">Paul Arizin, Neil Johnston</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="1975">1975</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Golden State Warriors</div>
+          <div class="timeline-players">Rick Barry</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="2015">2015</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Golden State Warriors</div>
+          <div class="timeline-players">Curry, Klay, Draymond</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="2017">2017</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Golden State Warriors</div>
+          <div class="timeline-players">Curry, KD, Klay, Draymond</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="2018">2018</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Golden State Warriors</div>
+          <div class="timeline-players">Curry, KD, Klay, Draymond</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year" data-count="2022">2022</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-team">Golden State Warriors</div>
+          <div class="timeline-players">Curry, Klay, Draymond, Wiggins</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>

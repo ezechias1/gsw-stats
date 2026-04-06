@@ -8,15 +8,19 @@
 </head>
 <body>
   <nav class="nav">
-    <a href="index.html" class="nav-logo">WARRIORS</a>
+    <a href="index.html" class="nav-logo">
+      <img src="img/warriors-logo.svg" alt="Warriors Logo" />
+      WARRIORS
+    </a>
     <div class="nav-links">
       <a href="index.html">HOME</a>
       <a href="roster.html">ROSTER</a>
       <a href="legends.html">LEGENDS</a>
       <a href="compare.html" class="active">COMPARE</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </nav>
-  <div class="compare-container">
+  <div class="compare-container main-content-animate">
     <div style="text-align:center;margin-bottom:40px">
       <div style="font-size:10px;letter-spacing:6px;color:var(--gold);margin-bottom:12px">HEAD TO HEAD</div>
       <h2 style="font-size:28px;font-weight:300;letter-spacing:2px">Compare Players</h2>
@@ -31,7 +35,18 @@
       </select>
     </div>
     <div id="comparison-result"></div>
+    <div class="share-bar" id="share-bar" style="display:none;">
+      <button class="share-btn" onclick="shareComparison()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        SHARE COMPARISON
+      </button>
+      <button class="share-btn" onclick="copyCompareLink()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        COPY LINK
+      </button>
+    </div>
   </div>
+  <div class="toast" id="toast"></div>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>

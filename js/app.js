@@ -2,6 +2,16 @@
 
 var currentPlayerList = [];
 
+// Guard helper: format a nullable stat value with toFixed(1), or return 'N/A'
+function fmt(value) {
+  return value !== null && value !== undefined ? value.toFixed(1) : 'N/A';
+}
+
+// Guard helper: return numeric value or 0 (for comparison math)
+function num(value) {
+  return value !== null && value !== undefined ? value : 0;
+}
+
 // ─────────────────────────────────────────────
 // TASK 3: Landing Page
 // ─────────────────────────────────────────────
@@ -16,10 +26,10 @@ function initHome() {
 
   var grid = document.getElementById('featured-stats');
   var stats = [
-    { label: 'PPG', value: player.career.ppg.toFixed(1) },
-    { label: 'RPG', value: player.career.rpg.toFixed(1) },
-    { label: 'APG', value: player.career.apg.toFixed(1) },
-    { label: 'FG%', value: player.career.fgPct.toFixed(1) }
+    { label: 'PPG', value: fmt(player.career.ppg) },
+    { label: 'RPG', value: fmt(player.career.rpg) },
+    { label: 'APG', value: fmt(player.career.apg) },
+    { label: 'FG%', value: fmt(player.career.fgPct) }
   ];
 
   var html = '';
@@ -66,14 +76,14 @@ function renderPlayerDetail(player) {
   }
 
   var careerStats = [
-    { label: 'PPG',  value: player.career.ppg.toFixed(1) },
-    { label: 'RPG',  value: player.career.rpg.toFixed(1) },
-    { label: 'APG',  value: player.career.apg.toFixed(1) },
-    { label: 'SPG',  value: player.career.spg.toFixed(1) },
-    { label: 'BPG',  value: player.career.bpg.toFixed(1) },
-    { label: 'FG%',  value: player.career.fgPct.toFixed(1) },
-    { label: '3P%',  value: player.career.threePct.toFixed(1) },
-    { label: 'FT%',  value: player.career.ftPct.toFixed(1) }
+    { label: 'PPG',  value: fmt(player.career.ppg) },
+    { label: 'RPG',  value: fmt(player.career.rpg) },
+    { label: 'APG',  value: fmt(player.career.apg) },
+    { label: 'SPG',  value: fmt(player.career.spg) },
+    { label: 'BPG',  value: fmt(player.career.bpg) },
+    { label: 'FG%',  value: fmt(player.career.fgPct) },
+    { label: '3P%',  value: fmt(player.career.threePct) },
+    { label: 'FT%',  value: fmt(player.career.ftPct) }
   ];
 
   var statGridHtml = '';
@@ -92,11 +102,11 @@ function renderPlayerDetail(player) {
         '<td>' + s.season + '</td>' +
         '<td>' + s.team + '</td>' +
         '<td>' + s.gp + '</td>' +
-        '<td>' + s.ppg.toFixed(1) + '</td>' +
-        '<td>' + s.rpg.toFixed(1) + '</td>' +
-        '<td>' + s.apg.toFixed(1) + '</td>' +
-        '<td>' + s.fgPct.toFixed(1) + '</td>' +
-        '<td>' + s.threePct.toFixed(1) + '</td>' +
+        '<td>' + fmt(s.ppg) + '</td>' +
+        '<td>' + fmt(s.rpg) + '</td>' +
+        '<td>' + fmt(s.apg) + '</td>' +
+        '<td>' + fmt(s.fgPct) + '</td>' +
+        '<td>' + fmt(s.threePct) + '</td>' +
         '</tr>';
     }
   }
@@ -243,17 +253,19 @@ function updateComparison() {
     var def = statDefs[j];
     var v1 = p1.career[def.key];
     var v2 = p2.career[def.key];
-    var max = Math.max(v1, v2);
-    var w1 = max > 0 ? (v1 / max) * 100 : 0;
-    var w2 = max > 0 ? (v2 / max) * 100 : 0;
-    var lead1 = v1 >= v2 ? ' leader' : '';
-    var lead2 = v2 >= v1 ? ' leader' : '';
-    var fill1 = v1 >= v2 ? 'fill leader' : 'fill trailing';
-    var fill2 = v2 >= v1 ? 'fill leader' : 'fill trailing';
+    var n1 = num(v1);
+    var n2 = num(v2);
+    var max = Math.max(n1, n2);
+    var w1 = max > 0 ? (n1 / max) * 100 : 0;
+    var w2 = max > 0 ? (n2 / max) * 100 : 0;
+    var lead1 = n1 >= n2 ? ' leader' : '';
+    var lead2 = n2 >= n1 ? ' leader' : '';
+    var fill1 = n1 >= n2 ? 'fill leader' : 'fill trailing';
+    var fill2 = n2 >= n1 ? 'fill leader' : 'fill trailing';
 
     html += '<div class="compare-row">' +
       '<div class="compare-side">' +
-        '<span class="compare-value' + lead1 + '">' + v1.toFixed(1) + '</span>' +
+        '<span class="compare-value' + lead1 + '">' + fmt(v1) + '</span>' +
         '<div class="compare-bar" style="justify-content:flex-end;">' +
           '<div class="' + fill1 + '" style="width:' + w1.toFixed(1) + '%;"></div>' +
         '</div>' +
@@ -263,7 +275,7 @@ function updateComparison() {
         '<div class="compare-bar">' +
           '<div class="' + fill2 + '" style="width:' + w2.toFixed(1) + '%;"></div>' +
         '</div>' +
-        '<span class="compare-value' + lead2 + '">' + v2.toFixed(1) + '</span>' +
+        '<span class="compare-value' + lead2 + '">' + fmt(v2) + '</span>' +
       '</div>' +
     '</div>';
   }

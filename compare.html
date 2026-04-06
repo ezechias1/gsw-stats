@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Players — Golden State Warriors</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">WARRIORS</a>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="roster.html">ROSTER</a>
+      <a href="legends.html">LEGENDS</a>
+      <a href="compare.html" class="active">COMPARE</a>
+    </div>
+  </nav>
+  <div class="compare-container">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font-size:10px;letter-spacing:6px;color:var(--gold);margin-bottom:12px">HEAD TO HEAD</div>
+      <h2 style="font-size:28px;font-weight:300;letter-spacing:2px">Compare Players</h2>
+    </div>
+    <div class="compare-selectors">
+      <select id="player1-select" onchange="updateComparison()">
+        <option value="">Select Player 1</option>
+      </select>
+      <div style="color:var(--text-muted);font-size:18px;font-weight:200">VS</div>
+      <select id="player2-select" onchange="updateComparison()">
+        <option value="">Select Player 2</option>
+      </select>
+    </div>
+    <div id="comparison-result"></div>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

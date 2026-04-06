@@ -10,7 +10,8 @@ const players = {
   // CURRENT ROSTER
   // ─────────────────────────────────────────────
 
-  curry: {
+  current: [
+  {
     id: "curry",
     name: "Stephen Curry",
     number: 30,
@@ -51,7 +52,7 @@ const players = {
     ]
   },
 
-  wiggins: {
+  {
     id: "wiggins",
     name: "Andrew Wiggins",
     number: 22,
@@ -88,7 +89,7 @@ const players = {
     ]
   },
 
-  draymond: {
+  {
     id: "draymond",
     name: "Draymond Green",
     number: 23,
@@ -126,7 +127,7 @@ const players = {
     ]
   },
 
-  looney: {
+  {
     id: "looney",
     name: "Kevon Looney",
     number: 5,
@@ -162,7 +163,7 @@ const players = {
     ]
   },
 
-  kuminga: {
+  {
     id: "kuminga",
     name: "Jonathan Kuminga",
     number: 0,
@@ -197,7 +198,7 @@ const players = {
     ]
   },
 
-  podziemski: {
+  {
     id: "podziemski",
     name: "Brandin Podziemski",
     number: 2,
@@ -229,7 +230,7 @@ const players = {
     ]
   },
 
-  moody: {
+  {
     id: "moody",
     name: "Moses Moody",
     number: 4,
@@ -263,7 +264,7 @@ const players = {
     ]
   },
 
-  jacksonDavis: {
+  {
     id: "jacksonDavis",
     name: "Trayce Jackson-Davis",
     number: 32,
@@ -296,7 +297,7 @@ const players = {
     ]
   },
 
-  gp2: {
+  {
     id: "gp2",
     name: "Gary Payton II",
     number: 8,
@@ -332,7 +333,7 @@ const players = {
     ]
   },
 
-  hield: {
+  {
     id: "hield",
     name: "Buddy Hield",
     number: 7,
@@ -366,13 +367,15 @@ const players = {
       "Top-10 All-Time in 3-pointers made (active)",
       "#6 Overall Pick (2016)"
     ]
-  },
+  }
+  ],
 
   // ─────────────────────────────────────────────
   // LEGENDS (career stats = Warriors tenure only)
   // ─────────────────────────────────────────────
 
-  chamberlain: {
+  legends: [
+  {
     id: "chamberlain",
     name: "Wilt Chamberlain",
     number: 13,
@@ -411,7 +414,7 @@ const players = {
     ]
   },
 
-  barry: {
+  {
     id: "barry",
     name: "Rick Barry",
     number: 24,
@@ -450,7 +453,7 @@ const players = {
     ]
   },
 
-  thurmond: {
+  {
     id: "thurmond",
     name: "Nate Thurmond",
     number: 42,
@@ -488,7 +491,7 @@ const players = {
     ]
   },
 
-  mullin: {
+  {
     id: "mullin",
     name: "Chris Mullin",
     number: 17,
@@ -527,7 +530,7 @@ const players = {
     ]
   },
 
-  timHardaway: {
+  {
     id: "timHardaway",
     name: "Tim Hardaway",
     number: 10,
@@ -565,7 +568,7 @@ const players = {
     ]
   },
 
-  richmond: {
+  {
     id: "richmond",
     name: "Mitch Richmond",
     number: 23,
@@ -601,7 +604,7 @@ const players = {
     ]
   },
 
-  baronDavis: {
+  {
     id: "baronDavis",
     name: "Baron Davis",
     number: 5,
@@ -636,7 +639,7 @@ const players = {
     ]
   },
 
-  klay: {
+  {
     id: "klay",
     name: "Klay Thompson",
     number: 11,
@@ -675,7 +678,7 @@ const players = {
     ]
   },
 
-  durant: {
+  {
     id: "durant",
     name: "Kevin Durant",
     number: 35,
@@ -712,7 +715,7 @@ const players = {
     ]
   },
 
-  iguodala: {
+  {
     id: "iguodala",
     name: "Andre Iguodala",
     number: 9,
@@ -750,34 +753,6 @@ const players = {
       "Naismith Hall of Fame eligible (2024)"
     ]
   }
+  ]
 
 };
-
-// Convenience groupings used by roster.html, legends.html, and compare.html
-const currentRoster = [
-  players.curry,
-  players.wiggins,
-  players.draymond,
-  players.looney,
-  players.kuminga,
-  players.podziemski,
-  players.moody,
-  players.jacksonDavis,
-  players.gp2,
-  players.hield
-];
-
-const legends = [
-  players.chamberlain,
-  players.barry,
-  players.thurmond,
-  players.mullin,
-  players.timHardaway,
-  players.richmond,
-  players.baronDavis,
-  players.klay,
-  players.durant,
-  players.iguodala
-];
-
-const allPlayers = [...currentRoster, ...legends];

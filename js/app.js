@@ -37,6 +37,19 @@ function toggleTheme() {
     localStorage.setItem('gsw-theme', 'light');
   }
   updateThemeIcon();
+
+  // Re-render chart with new theme colors if one is visible
+  if (currentChart && currentPlayerList.length > 0) {
+    var activeItem = document.querySelector('.sidebar-item.active');
+    if (activeItem) {
+      var id = activeItem.getAttribute('data-id');
+      var player = null;
+      for (var i = 0; i < currentPlayerList.length; i++) {
+        if (currentPlayerList[i].id === id) { player = currentPlayerList[i]; break; }
+      }
+      if (player) renderPlayerDetail(player);
+    }
+  }
 }
 
 function updateThemeIcon() {
@@ -391,7 +404,9 @@ function renderCareerChart(player) {
 
   var isLight = document.documentElement.getAttribute('data-theme') === 'light';
   var gridColor = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
-  var tickColor = isLight ? '#888' : '#666';
+  var tickColor = isLight ? '#666' : '#666';
+  var lineColor = isLight ? '#1D428A' : '#FFC72C';
+  var fillColor = isLight ? 'rgba(29, 66, 138, 0.12)' : 'rgba(29, 66, 138, 0.2)';
 
   currentChart = new Chart(ctx, {
     type: 'line',
@@ -400,10 +415,10 @@ function renderCareerChart(player) {
       datasets: [{
         label: 'PPG',
         data: data,
-        borderColor: '#FFC72C',
-        backgroundColor: 'rgba(29, 66, 138, 0.2)',
-        pointBackgroundColor: '#FFC72C',
-        pointBorderColor: '#FFC72C',
+        borderColor: lineColor,
+        backgroundColor: fillColor,
+        pointBackgroundColor: lineColor,
+        pointBorderColor: lineColor,
         pointRadius: 5,
         pointHoverRadius: 7,
         borderWidth: 2,
@@ -695,8 +710,14 @@ function initStars() {
     }
   }
 
+  function getStarColor() {
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    return isLight ? { r: 29, g: 66, b: 138 } : { r: 255, g: 199, b: 44 };
+  }
+
   function draw(time) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var c = getStarColor();
 
     for (var i = 0; i < stars.length; i++) {
       var s = stars[i];
@@ -720,14 +741,14 @@ function initStars() {
       if (s.size > 1.5 || reactBoost > 0.3) {
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size * 4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 199, 44, ' + (s.baseOpacity * 0.15) + ')';
+        ctx.fillStyle = 'rgba(' + c.r + ', ' + c.g + ', ' + c.b + ', ' + (s.baseOpacity * 0.15) + ')';
         ctx.fill();
       }
 
       // Draw star
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 199, 44, ' + s.baseOpacity + ')';
+      ctx.fillStyle = 'rgba(' + c.r + ', ' + c.g + ', ' + c.b + ', ' + s.baseOpacity + ')';
       ctx.fill();
     }
 

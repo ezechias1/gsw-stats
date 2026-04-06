@@ -19,41 +19,156 @@
    Light Theme
    ============================================= */
 [data-theme="light"] {
-  --bg: #f5f5f5;
+  --bg: #f0f1f5;
   --surface: #ffffff;
-  --border: #e0e0e0;
-  --text-primary: #111111;
-  --text-secondary: #444444;
-  --text-muted: #888888;
+  --border: #d4d6dd;
+  --gold: #c5a000;
+  --blue: #1D428A;
+  --text-primary: #0d0d0d;
+  --text-secondary: #333333;
+  --text-muted: #666666;
 }
 
 [data-theme="light"] .nav {
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .nav-logo {
+  color: #1D428A;
+}
+
+[data-theme="light"] .nav-links a.active {
+  color: #1D428A;
+  border-bottom-color: #1D428A;
+}
+
+[data-theme="light"] .nav-links a:hover {
+  color: #1D428A;
 }
 
 [data-theme="light"] .hero {
-  background: radial-gradient(ellipse at 50% 0%, rgba(255, 199, 44, 0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(29, 66, 138, 0.08) 0%, transparent 70%);
+}
+
+[data-theme="light"] .hero-logo {
+  filter: drop-shadow(0 0 30px rgba(29, 66, 138, 0.2));
+}
+
+[data-theme="light"] .hero-glow {
+  background: radial-gradient(circle, rgba(29, 66, 138, 0.12) 0%, transparent 70%);
+}
+
+[data-theme="light"] .stat-card {
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+}
+
+[data-theme="light"] .stat-value {
+  color: #1D428A;
+}
+
+[data-theme="light"] .accolade-tag {
+  background: rgba(29, 66, 138, 0.1);
+  color: #1D428A;
 }
 
 [data-theme="light"] .compare-selectors select {
   background: var(--surface);
   color: var(--text-primary);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .compare-selectors select:focus {
+  border-color: #1D428A;
+}
+
+[data-theme="light"] .compare-value.leader {
+  color: #1D428A;
+}
+
+[data-theme="light"] .compare-bar .fill.leader {
+  background: #1D428A;
+}
+
+[data-theme="light"] .compare-bar .fill.trailing {
+  background: #c5a000;
 }
 
 [data-theme="light"] .season-table tr:hover td {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(29, 66, 138, 0.04);
+}
+
+[data-theme="light"] .season-table th {
+  color: #1D428A;
+}
+
+[data-theme="light"] .sidebar {
+  background: var(--surface);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
 }
 
 [data-theme="light"] .sidebar-item:hover {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(29, 66, 138, 0.04);
 }
 
 [data-theme="light"] .sidebar-item.active {
-  background: rgba(255, 199, 44, 0.08);
+  background: rgba(29, 66, 138, 0.08);
+  border-left-color: #1D428A;
 }
 
-[data-theme="light"] .hero-glow {
-  opacity: 0.15;
+[data-theme="light"] .sidebar-item.active .player-name {
+  color: #1D428A;
+}
+
+[data-theme="light"] .player-photo {
+  border-color: var(--border);
+  background: #f0f1f5;
+}
+
+[data-theme="light"] .hero-divider {
+  background: #1D428A;
+}
+
+[data-theme="light"] .timeline-dot {
+  background: #1D428A;
+  box-shadow: 0 0 0 4px rgba(29, 66, 138, 0.2);
+}
+
+[data-theme="light"] .timeline-year {
+  color: #1D428A;
+}
+
+[data-theme="light"] .timeline-track::before {
+  background: #1D428A;
+}
+
+/* Light theme info cards */
+[data-theme="light"] div[style*="border-left: 3px solid var(--gold)"],
+[data-theme="light"] div[style*="border-left:3px solid var(--gold)"] {
+  border-left-color: #1D428A !important;
+}
+
+/* Light theme filter bar */
+[data-theme="light"] .filter-btn.active {
+  background: #1D428A;
+}
+
+[data-theme="light"] .filter-input {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .filter-input:focus {
+  border-color: #1D428A;
+}
+
+/* Stars in light mode — use blue instead of gold */
+[data-theme="light"] #stars-canvas {
+  opacity: 0.5;
 }
 
 /* =============================================
@@ -205,6 +320,11 @@ section, .page-layout, .compare-container {
 .theme-toggle:hover {
   border-color: var(--gold);
   color: var(--gold);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  border-color: #1D428A;
+  color: #1D428A;
 }
 
 .theme-toggle svg {

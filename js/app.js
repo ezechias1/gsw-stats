@@ -160,6 +160,123 @@ function initRoster() {
 }
 
 // ─────────────────────────────────────────────
+// TASK 5: Legends Page
+// ─────────────────────────────────────────────
+
+function initLegends() {
+  currentPlayerList = players.legends;
+  renderSidebar(players.legends, 'sidebar');
+  renderPlayerDetail(players.legends[0]);
+}
+
+// ─────────────────────────────────────────────
+// TASK 6: Compare Page
+// ─────────────────────────────────────────────
+
+function getAllPlayers() {
+  return players.current.concat(players.legends);
+}
+
+function populateDropdowns() {
+  var all = getAllPlayers();
+  var sel1 = document.getElementById('player1-select');
+  var sel2 = document.getElementById('player2-select');
+  var opts = '';
+  for (var i = 0; i < all.length; i++) {
+    opts += '<option value="' + all[i].id + '">#' + all[i].number + ' ' + all[i].name + '</option>';
+  }
+  sel1.innerHTML = '<option value="">Select Player 1</option>' + opts;
+  sel2.innerHTML = '<option value="">Select Player 2</option>' + opts;
+  sel1.value = 'curry';
+  sel2.value = 'chamberlain';
+  updateComparison();
+}
+
+function updateComparison() {
+  var sel1 = document.getElementById('player1-select');
+  var sel2 = document.getElementById('player2-select');
+  var id1 = sel1 ? sel1.value : '';
+  var id2 = sel2 ? sel2.value : '';
+  var result = document.getElementById('comparison-result');
+
+  if (!id1 || !id2) {
+    result.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:60px 0;font-size:13px;letter-spacing:2px;">SELECT TWO PLAYERS TO COMPARE</div>';
+    return;
+  }
+
+  var all = getAllPlayers();
+  var p1 = null, p2 = null;
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id1) p1 = all[i];
+    if (all[i].id === id2) p2 = all[i];
+  }
+
+  if (!p1 || !p2) {
+    result.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:60px 0;font-size:13px;letter-spacing:2px;">SELECT TWO PLAYERS TO COMPARE</div>';
+    return;
+  }
+
+  var statDefs = [
+    { label: 'PPG',  key: 'ppg' },
+    { label: 'RPG',  key: 'rpg' },
+    { label: 'APG',  key: 'apg' },
+    { label: 'SPG',  key: 'spg' },
+    { label: 'BPG',  key: 'bpg' },
+    { label: 'FG%',  key: 'fgPct' },
+    { label: '3P%',  key: 'threePct' },
+    { label: 'FT%',  key: 'ftPct' }
+  ];
+
+  var html = '<div class="compare-players">' +
+    '<div class="compare-player-header">' +
+      '<div class="compare-player-name">' +
+        '<div style="font-size:20px;font-weight:300;letter-spacing:1px;">' + p1.name + '</div>' +
+        '<div style="font-size:11px;letter-spacing:3px;color:var(--text-muted);margin-top:4px;">#' + p1.number + ' · ' + p1.position + ' · ' + p1.gamesPlayed + ' GP</div>' +
+      '</div>' +
+      '<div class="compare-player-name" style="text-align:right;">' +
+        '<div style="font-size:20px;font-weight:300;letter-spacing:1px;">' + p2.name + '</div>' +
+        '<div style="font-size:11px;letter-spacing:3px;color:var(--text-muted);margin-top:4px;">#' + p2.number + ' · ' + p2.position + ' · ' + p2.gamesPlayed + ' GP</div>' +
+      '</div>' +
+    '</div>';
+
+  for (var j = 0; j < statDefs.length; j++) {
+    var def = statDefs[j];
+    var v1 = p1.career[def.key];
+    var v2 = p2.career[def.key];
+    var max = Math.max(v1, v2);
+    var w1 = max > 0 ? (v1 / max) * 100 : 0;
+    var w2 = max > 0 ? (v2 / max) * 100 : 0;
+    var lead1 = v1 >= v2 ? ' leader' : '';
+    var lead2 = v2 >= v1 ? ' leader' : '';
+    var fill1 = v1 >= v2 ? 'fill leader' : 'fill trailing';
+    var fill2 = v2 >= v1 ? 'fill leader' : 'fill trailing';
+
+    html += '<div class="compare-row">' +
+      '<div class="compare-side">' +
+        '<span class="compare-value' + lead1 + '">' + v1.toFixed(1) + '</span>' +
+        '<div class="compare-bar" style="justify-content:flex-end;">' +
+          '<div class="' + fill1 + '" style="width:' + w1.toFixed(1) + '%;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="compare-label">' + def.label + '</div>' +
+      '<div class="compare-side">' +
+        '<div class="compare-bar">' +
+          '<div class="' + fill2 + '" style="width:' + w2.toFixed(1) + '%;"></div>' +
+        '</div>' +
+        '<span class="compare-value' + lead2 + '">' + v2.toFixed(1) + '</span>' +
+      '</div>' +
+    '</div>';
+  }
+
+  html += '</div>';
+  result.innerHTML = html;
+}
+
+function initCompare() {
+  populateDropdowns();
+}
+
+// ─────────────────────────────────────────────
 // Page Router
 // ─────────────────────────────────────────────
 
@@ -167,6 +284,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var page = location.pathname.split('/').pop() || 'index.html';
   if (page === 'index.html' || page === '') initHome();
   if (page === 'roster.html') initRoster();
-  if (page === 'legends.html') { if (typeof initLegends === 'function') initLegends(); }
-  if (page === 'compare.html') { if (typeof initCompare === 'function') initCompare(); }
+  if (page === 'legends.html') initLegends();
+  if (page === 'compare.html') initCompare();
 });

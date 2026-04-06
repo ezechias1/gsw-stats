@@ -1136,6 +1136,11 @@ section, .page-layout, .compare-container {
   .player-watermark {
     display: none;
   }
+
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
 }
 
 /* =============================================

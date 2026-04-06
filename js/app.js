@@ -659,11 +659,115 @@ function initCompare() {
 }
 
 // ─────────────────────────────────────────────
+// TWINKLING STARS BACKGROUND
+// ─────────────────────────────────────────────
+
+function initStars() {
+  var canvas = document.createElement('canvas');
+  canvas.id = 'stars-canvas';
+  document.body.prepend(canvas);
+
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+  var mouseX = -1000;
+  var mouseY = -1000;
+  var STAR_COUNT = 80;
+  var REACT_RADIUS = 200;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.body.scrollHeight;
+  }
+
+  function createStars() {
+    stars = [];
+    for (var i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        baseSize: Math.random() * 2 + 0.5,
+        size: 0,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        twinkleOffset: Math.random() * Math.PI * 2,
+        opacity: Math.random() * 0.5 + 0.2,
+        baseOpacity: 0
+      });
+    }
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var twinkle = Math.sin(time * s.twinkleSpeed + s.twinkleOffset);
+      s.baseOpacity = s.opacity * (0.5 + 0.5 * twinkle);
+      s.size = s.baseSize * (0.7 + 0.3 * twinkle);
+
+      // React to mouse — stars near cursor glow brighter and bigger
+      var dx = s.x - mouseX;
+      var dy = s.y - (mouseY + window.scrollY);
+      var dist = Math.sqrt(dx * dx + dy * dy);
+
+      var reactBoost = 0;
+      if (dist < REACT_RADIUS) {
+        reactBoost = 1 - (dist / REACT_RADIUS);
+        s.size += reactBoost * 3;
+        s.baseOpacity = Math.min(1, s.baseOpacity + reactBoost * 0.6);
+      }
+
+      // Draw glow
+      if (s.size > 1.5 || reactBoost > 0.3) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size * 4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 199, 44, ' + (s.baseOpacity * 0.15) + ')';
+        ctx.fill();
+      }
+
+      // Draw star
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 199, 44, ' + s.baseOpacity + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  document.addEventListener('mouseleave', function() {
+    mouseX = -1000;
+    mouseY = -1000;
+  });
+
+  window.addEventListener('resize', function() {
+    resize();
+  });
+
+  // Recompute canvas height periodically (for dynamic content)
+  setInterval(function() {
+    var newHeight = document.body.scrollHeight;
+    if (canvas.height !== newHeight) {
+      canvas.height = newHeight;
+    }
+  }, 2000);
+
+  resize();
+  createStars();
+  requestAnimationFrame(draw);
+}
+
+// ─────────────────────────────────────────────
 // Page Router
 // ─────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', function() {
   initTheme();
+  initStars();
 
   var btn = document.getElementById('theme-toggle');
   if (btn) {

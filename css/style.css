@@ -69,10 +69,25 @@ html {
   scroll-behavior: smooth;
 }
 
+#stars-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+[data-theme="light"] #stars-canvas {
+  opacity: 0.3;
+}
+
 body {
   margin: 0;
   padding: 0;
   background: var(--bg);
+  position: relative;
   color: var(--text-primary);
   font-family: var(--font);
   line-height: 1.5;
@@ -87,6 +102,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+section, .page-layout, .compare-container {
+  position: relative;
+  z-index: 1;
 }
 
 /* =============================================
@@ -116,8 +136,8 @@ a {
 }
 
 .nav-logo img {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
 }
 
 .nav-links {
@@ -211,11 +231,12 @@ a {
 }
 
 .hero-logo {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 24px;
+  width: 220px;
+  height: 220px;
+  margin-bottom: 32px;
   position: relative;
   z-index: 2;
+  filter: drop-shadow(0 0 40px rgba(255, 199, 44, 0.3));
 }
 
 .hero-glow {
@@ -223,8 +244,8 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -60%);
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 199, 44, 0.25) 0%, transparent 70%);
   animation: heroGlow 3s ease-in-out infinite alternate;
@@ -962,8 +983,8 @@ a {
   }
 
   .hero-logo {
-    width: 80px;
-    height: 80px;
+    width: 140px;
+    height: 140px;
   }
 }
 
@@ -1034,8 +1055,8 @@ a {
   }
 
   .hero-logo {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
   }
 
   .compare-selectors {
